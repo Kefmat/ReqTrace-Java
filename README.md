@@ -1,12 +1,11 @@
 # ReqTrace-Java
-## Requirements Traceability & Engineering Validation Bridge
+**Requirements Traceability and System Integrity Engine**
 
-**ReqTrace-Java** er et verktøy designet for å bygge bro mellom ustrukturerte krav i regneark og formelle systemmodeller i et Model-Based Systems Engineering (MBSE) miljø. Prosjektet demonstrerer hvordan man bruker bransjestandarden ReqIF (Requirements Interchange Format) for å sikre sporbarhet og dataintegritet i komplekse ingeniørprosjekter.
+ReqTrace-Java er et verktøy for statisk analyse av systemkrav, utviklet for å sikre datakvalitet og sporbarhet i komplekse ingeniørprosjekter (MBSE). Systemet fungerer som en bro mellom ustrukturerte inndata og formelle systemmodeller ved å validere krav mot etablerte ingeniørstandarder.
 
-**Dette verktøyet løser dette ved å:**
-
-1. Validere rådata via en VBA-basert "Linter" i Excel.
-
-2. Konvertere og parse data til standardisert ReqIF/XML-format.
-
-3. Analysere sporbarhet i Java for å identifisere "Orphan Requirements" (krav uten tilhørende systemkomponent).
+## Formål
+I utviklingen av kritiske systemer er presis kravformulering avgjørende for å redusere teknisk risiko. ReqTrace-Java automatiserer kontrollen av kravsett ved å:
+1. **Validere formell syntaks:** Kontrollere at krav følger "Shall"-konvensjonen for entydig verifisering.
+2. **Vurdere risikoeksponering:** Identifisere sikkerhetskritiske krav basert på nøkkelordanalyse (Safety/Hazard).
+3. **Analysere kompleksitet:** Identifisere krav med høy lingvistisk kompleksitet som kan medføre feiltolkning.
+4. **Visualisere systemarkitektur:** Generere arkitekturdiagrammer som kobler krav direkte til undersystemer.
