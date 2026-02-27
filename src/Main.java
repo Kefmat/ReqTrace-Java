@@ -5,18 +5,21 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // Initialiser komponenter
+        System.out.println("Starting ReqTrace-Java Analysis...");
+
         RequirementParser parser = new RequirementParser();
         TraceabilityReporter reporter = new TraceabilityReporter();
 
-        // Parse data fra XML   
-        System.out.println("Reading system requirements...");
         List<Requirement> reqs = parser.parseRequirements("data/system_reqs.xml");
 
-        // Generer rapport
-        System.out.println("Analyzing traceability and compliance...");
-        reporter.generateMarkdownReport(reqs, "Traceability_Report.md");
+        if (reqs.isEmpty()) {
+            System.out.println("Analysis aborted: No requirements found.");
+            return;
+        }
 
-        System.out.println("Process complete.");
+        reporter.generateMarkdownReport(reqs, "Traceability_Report.md");
+        reporter.exportToJson(reqs, "data/analysis_output.json");
+
+        System.out.println("Processing complete. Report and JSON export generated.");
     }
 }
