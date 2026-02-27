@@ -1,0 +1,23 @@
+# Java - Kompilerte filer
+*.class
+*.jar
+
+# Output-mapper
+bin/
+out/
+target/
+
+# Loggfiler
+*.log
+telemetry_log.txt
+
+# VS Code innstillinger
+.vscode/
+.history/
+
+# Mac-spesifikke filer
+.DS_Store
+
+# Test-output (rapporter vi genererer)
+*.md
+!README.md

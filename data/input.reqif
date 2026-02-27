@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<REQUIREMENT-SET PROJECT="Aegis-X">
+    <ITEM ID="REQ-NAV-01">
+        <TEXT>The guidance system shall maintain GPS lock during supersonic flight.</TEXT>
+        <SUBSYSTEM>Navigation</SUBSYSTEM>
+        <PRIORITY>Critical</PRIORITY>
+    </ITEM>
+    <ITEM ID="REQ-PROP-02">
+        <TEXT>The propulsion unit must provide 500kN of thrust.</TEXT>
+        <SUBSYSTEM>Propulsion</SUBSYSTEM>
+        <PRIORITY>High</PRIORITY>
+    </ITEM>
+    <ITEM ID="REQ-SAFE-03">
+        <TEXT>The self-destruct mechanism shall trigger if off-course by 5 degrees.</TEXT>
+        <SUBSYSTEM>Safety</SUBSYSTEM>
+        <PRIORITY>Critical</PRIORITY>
+    </ITEM>
+</REQUIREMENT-SET>
