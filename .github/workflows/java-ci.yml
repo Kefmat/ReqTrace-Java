@@ -19,17 +19,20 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         
-    - name: Compile Project and Tests
+    - name: Compile Everything
       run: |
         mkdir -p bin
-        find . src test -name "*.java" > sources.txt
+        # Vi søker fra rot (.) for å finne alle .java-filer uansett hvor de ligger
+        find . -name "*.java" > sources.txt
         javac -d bin @sources.txt
 
     - name: Run Unit Tests
       run: |
-        java -cp bin RequirementTest
+        # Vi bruker fullt pakkenavn siden RequirementTest.java har 'package test;'
+        java -cp bin test.RequirementTest
 
-    - name: Run Analysis Engine
+    - name: Run Main Application
       run: |
         mkdir -p data
+        # Vi kjører Main (som ligger i rot uten pakke)
         java -cp bin Main
