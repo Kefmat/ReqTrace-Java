@@ -4,33 +4,23 @@ import model.Requirement;
 
 public class RequirementTest {
     public static void main(String[] args) {
-        testComplianceValidation();
-        testComplexityScoring();
-        testImpactAnalysis();
-        System.out.println("All tests passed successfully.");
+        testRiskCalculation();
+        testSubsystemValidation();
+        System.out.println("Missile System Tests: All passed successfully.");
     }
 
-    private static void testComplianceValidation() {
-        Requirement validReq = new Requirement("1", "The system shall explode.", "Test", "High");
-        Requirement invalidReq = new Requirement("2", "The system should explode.", "Test", "Low");
-
-        if (!validReq.isCompliant()) throw new RuntimeException("Failed: Shall-requirement marked invalid");
-        if (invalidReq.isCompliant()) throw new RuntimeException("Failed: Should-requirement marked valid");
-    }
-
-    private static void testComplexityScoring() {
-        String longText = "This is a very long requirement text that should definitely be flagged as high complexity because it has too many words.";
-        Requirement complexReq = new Requirement("3", longText, "Test", "Low");
-        
-        if (!complexReq.getComplexityStatus().equals("High")) {
-            throw new RuntimeException("Failed: Long requirement not marked as High complexity");
+    private static void testRiskCalculation() {
+        Requirement warheadReq = new Requirement("M-01", "The warhead shall detonate on impact.", "Warhead", "Critical");
+        if (!warheadReq.getRiskLevel().contains("EXTREME")) {
+            throw new RuntimeException("Failed: Warhead risk not calculated correctly");
         }
     }
 
-    private static void testImpactAnalysis() {
-        Requirement safetyReq = new Requirement("4", "The safety valve must close.", "Safety", "Critical");
-        if (!safetyReq.getImpactLevel().contains("HIGH")) {
-            throw new RuntimeException("Failed: Safety keyword not detected in impact analysis");
-        }
+    private static void testSubsystemValidation() {
+        Requirement valid = new Requirement("M-02", "Text", "Guidance", "Low");
+        Requirement invalid = new Requirement("M-03", "Text", "Coffee Machine", "Low");
+
+        if (!valid.isValidSubsystem()) throw new RuntimeException("Failed: Valid subsystem rejected");
+        if (invalid.isValidSubsystem()) throw new RuntimeException("Failed: Invalid subsystem accepted");
     }
 }
