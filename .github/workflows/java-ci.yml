@@ -22,12 +22,14 @@ jobs:
     - name: Compile Project and Tests
       run: |
         mkdir -p bin
-        javac -d bin Main.java src/model/*.java src/parser/*.java src/engine/*.java test/RequirementTest.java
+        find src test -name "*.java" > sources.txt
+        javac -d bin @sources.txt
 
     - name: Run Unit Tests
       run: |
         java -cp bin test.RequirementTest
 
-    - name: Run Analysis Engine (Integration Test)
+    - name: Run Analysis Engine
       run: |
+        mkdir -p data
         java -cp bin Main
