@@ -1,4 +1,4 @@
-name: Java CI with Ant-style build
+name: Java CI with Automated Testing
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,11 +19,15 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         
-    - name: Compile Project
+    - name: Compile Project and Tests
       run: |
         mkdir -p bin
-        javac -d bin src/model/*.java src/parser/*.java src/engine/*.java src/Main.java
+        javac -d bin src/model/*.java src/parser/*.java src/engine/*.java src/Main.java test/*.java
 
-    - name: Run Analysis Engine
+    - name: Run Unit Tests
+      run: |
+        java -cp bin test.RequirementTest
+
+    - name: Run Analysis Engine (Integration Test)
       run: |
         java -cp bin Main
