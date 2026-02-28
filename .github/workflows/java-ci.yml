@@ -22,7 +22,7 @@ jobs:
     - name: Compile Project and Tests
       run: |
         mkdir -p bin
-        javac -d bin src/model/*.java src/parser/*.java src/engine/*.java src/Main.java test/*.java
+        javac -d bin Main.java src/engine/*.java src/model/*.java src/parser/*.java test/*.java
 
     - name: Run Unit Tests
       run: |
