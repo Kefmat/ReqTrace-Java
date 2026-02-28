@@ -9,3 +9,5 @@ I utviklingen av kritiske systemer er presis kravformulering avgjørende for å 
 2. **Vurdere risikoeksponering:** Identifisere sikkerhetskritiske krav basert på nøkkelordanalyse (Safety/Hazard).
 3. **Analysere kompleksitet:** Identifisere krav med høy lingvistisk kompleksitet som kan medføre feiltolkning.
 4. **Visualisere systemarkitektur:** Generere arkitekturdiagrammer som kobler krav direkte til undersystemer.
+
+-
