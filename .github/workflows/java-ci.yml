@@ -1,0 +1,29 @@
+name: Java CI with Ant-style build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Compile Project
+      run: |
+        mkdir -p bin
+        javac -d bin src/model/*.java src/parser/*.java src/engine/*.java src/Main.java
+
+    - name: Run Analysis Engine
+      run: |
+        java -cp bin Main
