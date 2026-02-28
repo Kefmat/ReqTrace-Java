@@ -22,7 +22,7 @@ jobs:
     - name: Compile Project and Tests
       run: |
         mkdir -p bin
-        find src test -name "*.java" > sources.txt
+        find . src test -name "*.java" > sources.txt
         javac -d bin @sources.txt
 
     - name: Run Unit Tests
