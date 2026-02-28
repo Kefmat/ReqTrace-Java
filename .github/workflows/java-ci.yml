@@ -27,7 +27,7 @@ jobs:
 
     - name: Run Unit Tests
       run: |
-        java -cp bin test.RequirementTest
+        java -cp bin RequirementTest
 
     - name: Run Analysis Engine
       run: |
