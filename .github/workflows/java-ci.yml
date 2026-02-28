@@ -22,19 +22,16 @@ jobs:
     - name: Compile Everything
       run: |
         mkdir -p bin
-        # Finner alle kildekoder for kompilering
         find . -name "*.java" > sources.txt
         javac -d bin @sources.txt
 
     - name: Check Javadoc Generation
       run: |
-        # Validerer at dokumentasjonen kan bygges uten feil
         mkdir -p docs
-        javadoc -d docs -sourcepath src/model:src/engine:src/parser -subpackages model:engine:parser Main.java
+        javadoc -d docs -sourcepath src -subpackages model:engine:parser src/Main.java
 
     - name: Run Unit Tests
       run: |
-        # Kjører tester med riktig klassesti
         java -cp bin test.RequirementTest
 
     - name: Run Main Application
