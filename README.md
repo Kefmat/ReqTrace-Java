@@ -33,6 +33,7 @@ Prosjektet benytter GitHub Actions for å sikre kontinuerlig integritet. Hver pr
 * **Subsystem Integrity:** Validering av tekniske komponenter.
 
 ## Prosjektstruktur
+```
 ├── .github/workflows/    # CI/CD Pipeline konfigurasjon
 ├── src/
 │   ├── Main.java         # System-orkestrator og status-logging
@@ -42,10 +43,10 @@ Prosjektet benytter GitHub Actions for å sikre kontinuerlig integritet. Hver pr
 ├── data/                 # Kildedata i XML-format
 ├── test/                 # Enhetstester for logikkvalidering
 └── docs/                 # Automatisk generert teknisk dokumentasjon
+```
 
-
-## Installasjon og Bruk
-
+Installasjon og Bruk
+Bash
 # Kompilering av systemet
 ```javac -d bin -sourcepath src src/Main.java```
 
