@@ -8,8 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Requirement;
 
+/**
+ * Ansvarlig for å lese og tolke XML-filer som inneholder systemkrav.
+ */
 public class RequirementParser {
-    public List<Requirement> parseRequirements(String filePath) {
+
+    /**
+     * Leser en XML-fil og returnerer en liste med krav.
+     * @param filePath Stien til XML-filen.
+     * @return En liste over Requirement-objekter.
+     */
+    public List<Requirement> parse(String filePath) { // Endret navn fra parseRequirements til parse
         List<Requirement> requirements = new ArrayList<>();
         try {
             File file = new File(filePath);

@@ -3,23 +3,56 @@ import parser.RequirementParser;
 import engine.TraceabilityReporter;
 import java.util.List;
 
+/**
+ * Hovedklassen for Missilsystemets Sporbarhetsanalyse.
+ * Koordinerer parsing, analyse og generering av rapporter.
+ */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Starting ReqTrace-Java Analysis...");
-
         RequirementParser parser = new RequirementParser();
         TraceabilityReporter reporter = new TraceabilityReporter();
 
-        List<Requirement> reqs = parser.parseRequirements("data/system_reqs.xml");
+        List<Requirement> requirements = parser.parse("data/system_reqs.xml");
 
-        if (reqs.isEmpty()) {
-            System.out.println("Analysis aborted: No requirements found.");
-            return;
+        reporter.generateMarkdownReport(requirements, "Traceability_Report.md");
+        reporter.exportToJson(requirements, "analysis_output.json");
+
+        printMissionBriefing(requirements);
+    }
+
+    /**
+     * Skriver ut en militær statusrapport basert på analysen.
+     */
+    private static void printMissionBriefing(List<Requirement> reqs) {
+        int extreme = 0;
+        int high = 0;
+        int vague = 0;
+        int nonCompliant = 0;
+
+        for (Requirement r : reqs) {
+            if (r.getRiskLevel().contains("EXTREME")) extreme++;
+            else if (r.getRiskLevel().contains("HIGH")) high++;
+            
+            if (r.isVague()) vague++;
+            if (!r.isCompliant()) nonCompliant++;
         }
 
-        reporter.generateMarkdownReport(reqs, "Traceability_Report.md");
-        reporter.exportToJson(reqs, "data/analysis_output.json");
-
-        System.out.println("Processing complete. Report and JSON export generated.");
+        System.out.println("\n===========================================");
+        System.out.println("   MISSILE SYSTEM ANALYSIS BRIEFING");
+        System.out.println("===========================================");
+        System.out.println("Totalt antall krav analysert: " + reqs.size());
+        System.out.println("-------------------------------------------");
+        System.out.println("EKSTREM RISIKO (Kritisk):     " + extreme);
+        System.out.println("HØY RISIKO (Sikkerhet):       " + high);
+        System.out.println("Uklare krav (Vague):          " + vague);
+        System.out.println("Ikke-formelle krav (No shall): " + nonCompliant);
+        System.out.println("-------------------------------------------");
+        
+        if (extreme > 0) {
+            System.out.println("STATUS: HANDLING KREVES - Kritiske feil funnet.");
+        } else {
+            System.out.println("STATUS: SYSTEM KLART FOR VIDERE TESTING.");
+        }
+        System.out.println("===========================================\n");
     }
 }
