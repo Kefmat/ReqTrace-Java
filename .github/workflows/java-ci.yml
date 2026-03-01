@@ -16,7 +16,7 @@ jobs:
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '17' 
         distribution: 'temurin'
         
     - name: Compile Everything
@@ -38,3 +38,17 @@ jobs:
       run: |
         mkdir -p data
         java -cp bin Main
+    
+    - name: Upload Analysis Reports
+      uses: actions/upload-artifact@v4
+      with:
+        name: missile-analysis-reports
+        path: |
+          Traceability_Report.md
+          analysis_output.json
+
+    - name: Upload Javadoc
+      uses: actions/upload-artifact@v4
+      with:
+        name: java-documentation
+        path: docs/
