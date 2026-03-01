@@ -1,13 +1,53 @@
-# ReqTrace-Java
-**Requirements Traceability and System Integrity Engine**
+# ReqTrace-Java: Missile Edition
+**Automated Requirements Traceability and Risk Analysis Engine**
 
-ReqTrace-Java er et verktøy for statisk analyse av systemkrav, utviklet for å sikre datakvalitet og sporbarhet i komplekse ingeniørprosjekter (MBSE). Systemet fungerer som en bro mellom ustrukturerte inndata og formelle systemmodeller ved å validere krav mot etablerte ingeniørstandarder.
+ReqTrace-Java er et verktøy for statisk analyse og risikovurdering av systemkrav i sikkerhetskritiske prosjekter. Systemet er spesialisert for missilteknologi (Propulsion, Guidance, Warhead) og fungerer som en automatisert valideringsenhet i en moderne DevOps-pipeline.
 
-## Formål
-I utviklingen av kritiske systemer er presis kravformulering avgjørende for å redusere teknisk risiko. ReqTrace-Java automatiserer kontrollen av kravsett ved å:
-1. **Validere formell syntaks:** Kontrollere at krav følger "Shall"-konvensjonen for entydig verifisering.
-2. **Vurdere risikoeksponering:** Identifisere sikkerhetskritiske krav basert på nøkkelordanalyse (Safety/Hazard).
-3. **Analysere kompleksitet:** Identifisere krav med høy lingvistisk kompleksitet som kan medføre feiltolkning.
-4. **Visualisere systemarkitektur:** Generere arkitekturdiagrammer som kobler krav direkte til undersystemer.
+## Systemarkitektur
 
--
+Systemet er bygget etter en modulær lagdelt arkitektur for å sikre separasjon av ansvar mellom dataparsing, analyse og rapportering.
+
+```mermaid
+graph TD
+    A[data/system_reqs.xml] -->|Input| B(RequirementParser)
+    B --> C{Analysis Engine}
+    C -->|Validation| D[model/Requirement]
+    C -->|Reporting| E(TraceabilityReporter)
+    E -->|Output| F[Markdown Report]
+    E -->|Output| G[JSON Artifacts]
+    C -->|Logging| H[Terminal Mission Briefing]
+```
+
+## DevOps og CI/CD Pipeline
+Prosjektet benytter GitHub Actions for å sikre kontinuerlig integritet. Hver programvareoppdatering trigger en fullstendig livssyklus-sjekk:
+
+* **Build and Compile:** Verifiserer at kildekoden kompilerer feilfritt med JDK 17.
+* **Automated Javadoc:** Validerer at all teknisk dokumentasjon følger fastsatte standarder.
+* **Unit Testing:** Utfører regresjonstester på algoritmer for risikoberegning.
+* **Artifact Management:** Lagrer analyserapporter (.md og .json) som persistente artefakter.
+
+## Funksjonalitet
+* **Risk Score Algorithm:** Kategorisering av risiko (EXTREME, HIGH, MEDIUM).
+* **Vague Word Detection:** Identifisering av uklare lingvistiske formuleringer.
+* **Formal Compliance:** Verifisering av "Shall"-konvensjonen.
+* **Subsystem Integrity:** Validering av tekniske komponenter.
+
+## Prosjektstruktur
+├── .github/workflows/    # CI/CD Pipeline konfigurasjon
+├── src/
+│   ├── Main.java         # System-orkestrator og status-logging
+│   ├── model/            # Domenemodell og forretningslogikk
+│   ├── parser/           # XML data-ingestion moduler
+│   └── engine/           # Rapporterings- og eksporttjenester
+├── data/                 # Kildedata i XML-format
+├── test/                 # Enhetstester for logikkvalidering
+└── docs/                 # Automatisk generert teknisk dokumentasjon
+
+
+## Installasjon og Bruk
+
+# Kompilering av systemet
+```javac -d bin -sourcepath src src/Main.java```
+
+# Eksekvering av analyse
+```java -cp bin Main```
