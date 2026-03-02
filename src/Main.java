@@ -17,13 +17,22 @@ public class Main {
         reporter.generateMarkdownReport(requirements, "Traceability_Report.md");
         reporter.exportToJson(requirements, "analysis_output.json");
 
-        printMissionBriefing(requirements);
+        // Utfør briefing og lagre antall kritiske feil
+        int extremeRisks = printMissionBriefing(requirements);
+
+        // QUALITY GATE: Stopper bygget hvis det finnes ekstrem risiko
+        if (extremeRisks > 0) {
+            System.err.println("CRITICAL FAILURE: " + extremeRisks + " extreme risk(s) detected. Pipeline halted.");
+            System.exit(1);
+        }
     }
 
     /**
      * Skriver ut en militær statusrapport basert på analysen.
+     * @param reqs Listen med krav som skal briefes.
+     * @return Antall krav med ekstrem risiko funnet.
      */
-    private static void printMissionBriefing(List<Requirement> reqs) {
+    private static int printMissionBriefing(List<Requirement> reqs) {
         int extreme = 0;
         int high = 0;
         int vague = 0;
@@ -54,5 +63,7 @@ public class Main {
             System.out.println("STATUS: SYSTEM KLART FOR VIDERE TESTING.");
         }
         System.out.println("===========================================\n");
+
+        return extreme;
     }
 }
