@@ -22,7 +22,8 @@ public class Main {
 
         // QUALITY GATE: Stopper bygget hvis det finnes ekstrem risiko
         if (extremeRisks > 0) {
-            System.err.println("CRITICAL FAILURE: " + extremeRisks + " extreme risk(s) detected. Pipeline halted.");
+            System.err.println("\n[!] QUALITY GATE FAILED: " + extremeRisks + " extreme risk(s) detected.");
+            System.err.println("[!] Action: Deployment halted. Fix requirements in data/system_reqs.xml.");
             System.exit(1);
         }
     }
@@ -39,6 +40,7 @@ public class Main {
         int nonCompliant = 0;
 
         for (Requirement r : reqs) {
+            String risk = r.getRiskLevel().toUpperCase();
             if (r.getRiskLevel().contains("EXTREME")) extreme++;
             else if (r.getRiskLevel().contains("HIGH")) high++;
             
