@@ -1,6 +1,7 @@
 import model.Requirement;
 import parser.RequirementParser;
 import engine.TraceabilityReporter;
+import engine.HtmlDashboardGenerator;
 import java.util.List;
 
 /**
@@ -11,11 +12,15 @@ public class Main {
     public static void main(String[] args) {
         RequirementParser parser = new RequirementParser();
         TraceabilityReporter reporter = new TraceabilityReporter();
+        HtmlDashboardGenerator dashboard = new HtmlDashboardGenerator();
 
+        // Leser krav fra XML-filen
         List<Requirement> requirements = parser.parse("data/system_reqs.xml");
 
+        // Genererer rapporter (Markdown, JSON og det nye visuelle Dashboardet)
         reporter.generateMarkdownReport(requirements, "Traceability_Report.md");
         reporter.exportToJson(requirements, "analysis_output.json");
+        dashboard.create(requirements, "dashboard.html");
 
         // Utfør briefing og lagre antall kritiske feil
         int extremeRisks = printMissionBriefing(requirements);
@@ -41,8 +46,8 @@ public class Main {
 
         for (Requirement r : reqs) {
             String risk = r.getRiskLevel().toUpperCase();
-            if (r.getRiskLevel().contains("EXTREME")) extreme++;
-            else if (r.getRiskLevel().contains("HIGH")) high++;
+            if (risk.contains("EXTREME")) extreme++;
+            else if (risk.contains("HIGH")) high++;
             
             if (r.isVague()) vague++;
             if (!r.isCompliant()) nonCompliant++;
