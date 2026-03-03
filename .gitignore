@@ -21,3 +21,7 @@ telemetry_log.txt
 # Test-output (rapporter vi genererer)
 *.md
 !README.md
+
+# Spesifikke rapporter
+dashboard.html
+analysis_output.json
