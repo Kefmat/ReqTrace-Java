@@ -32,6 +32,8 @@ Prosjektet benytter GitHub Actions for å sikre kontinuerlig integritet. Hver pr
 * **Formal Compliance:** Verifisering av "Shall"-konvensjonen.
 * **Subsystem Integrity:** Validering av tekniske komponenter.
 
+<img width="1152" height="476" alt="ReqTrace dashbord" src="https://github.com/user-attachments/assets/c8aae9ee-f3ab-4c60-a2a3-b14a5e3881e3" />
+
 ## Prosjektstruktur
 ```
 ├── .github/workflows/    # CI/CD Pipeline konfigurasjon
