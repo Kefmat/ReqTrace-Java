@@ -2,17 +2,37 @@
 <REQUIREMENT-SET PROJECT="Aegis-X">
     <ITEM ID="REQ-NAV-01">
         <TEXT>The guidance system shall maintain GPS lock during supersonic flight.</TEXT>
-        <SUBSYSTEM>Navigation</SUBSYSTEM>
+        <SUBSYSTEM>Guidance</SUBSYSTEM>
         <PRIORITY>Critical</PRIORITY>
     </ITEM>
+
     <ITEM ID="REQ-SAFE-03">
         <TEXT>The self-destruct mechanism shall trigger if a safety hazard is detected.</TEXT>
-        <SUBSYSTEM>Safety</SUBSYSTEM>
+        <SUBSYSTEM>Launch Control</SUBSYSTEM>
         <PRIORITY>Critical</PRIORITY>
     </ITEM>
+
     <ITEM ID="REQ-PROP-02">
         <TEXT>The propulsion unit must provide sufficient thrust for atmospheric exit.</TEXT>
         <SUBSYSTEM>Propulsion</SUBSYSTEM>
         <PRIORITY>High</PRIORITY>
+    </ITEM>
+
+    <ITEM ID="REQ-COMM-04">
+        <TEXT>Telemetry data shall be transmitted raskt to ground station.</TEXT>
+        <SUBSYSTEM>Telemetry</SUBSYSTEM>
+        <PRIORITY>Medium</PRIORITY>
+    </ITEM>
+
+    <ITEM ID="REQ-EXT-05">
+        <TEXT>The outer shell shall withstand friction heat.</TEXT>
+        <SUBSYSTEM>Hull-Structure</SUBSYSTEM>
+        <PRIORITY>Medium</PRIORITY>
+    </ITEM>
+
+    <ITEM ID="REQ-WAR-06">
+        <TEXT>The Warhead detonation sequence shall initiate upon impact.</TEXT>
+        <SUBSYSTEM>Warhead</SUBSYSTEM>
+        <PRIORITY>Critical</PRIORITY>
     </ITEM>
 </REQUIREMENT-SET>

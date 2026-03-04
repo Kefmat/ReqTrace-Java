@@ -7,10 +7,15 @@ bin/
 out/
 target/
 
-# Loggfiler
+# Loggfiler og telemetri
 *.log
 telemetry_log.txt
 analysis_history.log
+
+# Arkiv og genererte rapporter
+dashboard.html
+analysis_output.json
+Traceability_Report.md
 
 # VS Code innstillinger
 .vscode/
@@ -19,10 +24,5 @@ analysis_history.log
 # Mac-spesifikke filer
 .DS_Store
 
-# Test-output (rapporter vi genererer)
-*.md
+# Unntak
 !README.md
-
-# Spesifikke rapporter
-dashboard.html
-analysis_output.json

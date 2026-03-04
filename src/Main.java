@@ -2,27 +2,39 @@ import model.Requirement;
 import parser.RequirementParser;
 import engine.TraceabilityReporter;
 import engine.HtmlDashboardGenerator;
-import engine.TelemetryLogger; // Ny import
+import engine.TelemetryLogger;
+import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
  * Hovedklassen for Missilsystemets Sporbarhetsanalyse.
- * Koordinerer parsing, analyse og generering av rapporter.
+ * Koordinerer parsing, analyse og generering av rapporter med arkivering.
  */
 public class Main {
     public static void main(String[] args) {
+        cleanupOldReports();
+
+        // Generer tidsstempel for kjøringen
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmm"));
+
         RequirementParser parser = new RequirementParser();
         TraceabilityReporter reporter = new TraceabilityReporter();
         HtmlDashboardGenerator dashboard = new HtmlDashboardGenerator();
-        TelemetryLogger logger = new TelemetryLogger(); // Instansierer loggeren
+        TelemetryLogger logger = new TelemetryLogger();
 
         // Leser krav fra XML-filen
         List<Requirement> requirements = parser.parse("data/system_reqs.xml");
 
-        // Genererer rapporter (Markdown, JSON og det nye visuelle Dashboardet)
+        // 1. Generer standardrapporter (overskrives ved hver kjøring)
         reporter.generateMarkdownReport(requirements, "Traceability_Report.md");
         reporter.exportToJson(requirements, "analysis_output.json");
         dashboard.create(requirements, "dashboard.html");
+
+        // 2. Generer arkivkopier (beholdes med unikt tidsstempel)
+        reporter.generateMarkdownReport(requirements, "archive/Report_" + timestamp + ".md");
+        dashboard.create(requirements, "archive/Dashboard_" + timestamp + ".html");
 
         // Logger telemetri for historisk sporing
         logger.logAnalysis(requirements);
@@ -36,6 +48,25 @@ public class Main {
             System.err.println("[!] Action: Deployment halted. Fix requirements in data/system_reqs.xml.");
             System.exit(1);
         }
+    }
+
+    /**
+     * Sletter gamle rapportfiler og sikrer at archive-mappen eksisterer.
+     */
+    private static void cleanupOldReports() {
+        File archiveDir = new File("archive");
+        if (!archiveDir.exists()) {
+            archiveDir.mkdir();
+        }
+
+        String[] filesToClean = {"dashboard.html", "analysis_output.json", "Traceability_Report.md"};
+        for (String fileName : filesToClean) {
+            File file = new File(fileName);
+            if (file.exists()) {
+                file.delete();
+            }
+        }
+        System.out.println("System cleanup complete: Old reports removed and archive ready.");
     }
 
     /**
