@@ -2,6 +2,7 @@ import model.Requirement;
 import parser.RequirementParser;
 import engine.TraceabilityReporter;
 import engine.HtmlDashboardGenerator;
+import engine.TelemetryLogger; // Ny import
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ public class Main {
         RequirementParser parser = new RequirementParser();
         TraceabilityReporter reporter = new TraceabilityReporter();
         HtmlDashboardGenerator dashboard = new HtmlDashboardGenerator();
+        TelemetryLogger logger = new TelemetryLogger(); // Instansierer loggeren
 
         // Leser krav fra XML-filen
         List<Requirement> requirements = parser.parse("data/system_reqs.xml");
@@ -21,6 +23,9 @@ public class Main {
         reporter.generateMarkdownReport(requirements, "Traceability_Report.md");
         reporter.exportToJson(requirements, "analysis_output.json");
         dashboard.create(requirements, "dashboard.html");
+
+        // Logger telemetri for historisk sporing
+        logger.logAnalysis(requirements);
 
         // Utfør briefing og lagre antall kritiske feil
         int extremeRisks = printMissionBriefing(requirements);
@@ -34,7 +39,7 @@ public class Main {
     }
 
     /**
-     * Skriver ut en militær statusrapport basert på analysen.
+     * Skriver ut en militaer statusrapport basert paa analysen.
      * @param reqs Listen med krav som skal briefes.
      * @return Antall krav med ekstrem risiko funnet.
      */
@@ -59,7 +64,7 @@ public class Main {
         System.out.println("Totalt antall krav analysert: " + reqs.size());
         System.out.println("-------------------------------------------");
         System.out.println("EKSTREM RISIKO (Kritisk):     " + extreme);
-        System.out.println("HOEY RISIKO (Sikkerhet):      " + high);
+        System.out.println("HØY RISIKO (Sikkerhet):      " + high);
         System.out.println("Uklare krav (Vague):          " + vague);
         System.out.println("Ikke-formelle krav (No shall): " + nonCompliant);
         System.out.println("-------------------------------------------");
