@@ -59,7 +59,7 @@ public class Main {
         System.out.println("Totalt antall krav analysert: " + reqs.size());
         System.out.println("-------------------------------------------");
         System.out.println("EKSTREM RISIKO (Kritisk):     " + extreme);
-        System.out.println("HØY RISIKO (Sikkerhet):       " + high);
+        System.out.println("HOEY RISIKO (Sikkerhet):      " + high);
         System.out.println("Uklare krav (Vague):          " + vague);
         System.out.println("Ikke-formelle krav (No shall): " + nonCompliant);
         System.out.println("-------------------------------------------");
