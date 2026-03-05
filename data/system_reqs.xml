@@ -33,6 +33,6 @@
     <ITEM ID="REQ-WAR-06">
         <TEXT>The Warhead detonation sequence shall initiate upon impact.</TEXT>
         <SUBSYSTEM>Warhead</SUBSYSTEM>
-        <PRIORITY>Critical</PRIORITY>
+        <PRIORITY>High</PRIORITY> 
     </ITEM>
 </REQUIREMENT-SET>
